@@ -155,50 +155,56 @@ nav.user a:hover {
     width: 10%;
 }
 
-/* TO REVIEW */
-/*similar product*/
-.similarProduct {
-  display: inline;
-  width: 100%;
-  background-color: white;
-  text-align: center;
+/* Related Artwork */
+.related {
+    display: flex;
+    width: 100%;
+    background-color: white;
+    text-align: center;
+    overflow-y: scroll;
 }
 
-#title2 {
-  border-bottom: 1px solid black;
-  padding-top: 20px;
+.related h2 {
+    border-bottom: 1px solid black;
+    padding-top: 20px;
 }
 
-.similarProduct figure {
-  display: inline;
-  margin: 17px;
+.related .relatedArt {
+    margin: 15px;
+    height: 200px;
+    border-color: black;
+    border-width: 1px;
+    border-style: solid;
+    padding-top: 10px;
+    padding-left: 30px;
+    padding-right: 30px;
 }
 
-.similarProduct img {
-  height: 150px;
-  width: 150px;
+.related figure {
+    height: 170px;
 }
 
-.text_right {
-  text-align: left;
+.related img {
+    max-width: 150px;
+    max-height: 150px;
 }
 
-.first_float {
-  float: left;
-  padding: 15px;
-  padding-left: 30px;
-  padding-right: 30px;
-  border-color: black;
-  border-width: 1px;
-  border-style: solid;
+.related p {
+    padding-bottom: 5px;
+    font-style: italic;
 }
 
-.first_float button {
-  padding: 5px;
-  margin: 5px;
+.related a {
+    color: black;
+    text-decoration: none;
 }
-
-.floar_clear {
-  clear: left;
-  display: block;
+.related .actions a {
+    padding: 5px;
+    margin: 5px;
+    font-weight: bold;
+    color: blue;
+    background-color: #E8E8E8;
+    border: solid 1px black;
+    border-style: outset;
+    border-radius: 10px;
 }
