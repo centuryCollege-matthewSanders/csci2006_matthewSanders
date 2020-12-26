@@ -1,11 +1,47 @@
 <?php
 
 require_once('util.php');
+require_once('staticPages.php');
 require_once('artwork.php');
+require_once('artist.php');
 
-$artwork = new Artwork(1);
-$title = $artwork->getTitle();
-$body = $artwork->getInfoPage();
+$title = 'Unknown';
+$body = '404 Error';
+
+switch ($_GET['pg']) {
+    case 'artwork':
+        $artwork = new Artwork(1);
+        $title = $artwork->getTitle();
+        $body = $artwork->getInfoPage();
+        break;
+    case 'about':
+        $title = 'About Us';
+        $body = getAboutUs();
+        break;
+    case 'artist':
+        $artist = new Artist(1);
+        $title = $artist->getTitle();
+        $body = $artist->getInfoPage();
+        break;
+    default:
+    case 'home':
+        $title = 'Art Shop';
+        $body = getHomepage();
+        break;
+}
+
+$userNav = buildNavigation(array(
+        'acct'=>'My Account',
+        'wish'=>'Wishlist',
+        'cart'=>'Shopping Cart',
+    ), 'user');
+$mainNav = buildNavigation(array(
+        'home'=>'Home',
+        'about'=>'About Us',
+        'artwork'=>'Artworks',
+        'artist'=>'Artists',
+    ));
+
 
 echo <<<__HTML__
 <!DOCTYPE html>
@@ -17,24 +53,9 @@ echo <<<__HTML__
 </head>
 <body>
     <header>
-        <nav class="user">
-            <!-- TODO: Make dynamic -->
-            <ul>
-                <li><a href="#">My Account</a></li>
-                <li><a href="#">Wish List</a></li>
-                <li><a href="#">Shopping Cart</a></li>
-                <li><a href="#">Checkout</a></li>
-            </ul>
-        </nav>
+        {$userNav}
         <h1>Art Store</h1>
-        <nav>
-            <ul id="second_nav">
-                <li><a href="#">Home</a></li>
-                <li><a href="#">About Us</a></li>
-                <li><a href="#">Art Works</a></li>
-                <li><a href="#">Artists</a></li>
-            </ul>
-        </nav>
+        {$mainNav}
     </header>
     <main>
         {$body}

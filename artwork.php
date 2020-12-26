@@ -1,11 +1,17 @@
 <?php
 
-class Artwork {
+require_once('object.php');
+
+class Artwork implements Obj {
     private $id;
     private $dbInfo;
 
     public function __construct($id) {
 
+    }
+
+    public static function getRandom() {
+        return new Artwork(1);
     }
 
     public function getTitle() {
@@ -65,12 +71,30 @@ class Artwork {
         );
     }
 
+    public function getImageName($thumb=false) {
+        if ($thumb) {
+            return 'artwork/small/13.jpg';
+        } else {
+            return 'artwork/medium/13.jpg';
+        }
+    }
+
+    public function getPreview() {
+        return '<article class="artPreview">'.
+                '<figure>'.
+                    '<img src="'.$this->getImageName().'" alt="'.$this->getName().'" title="'.$this->getName().'" />'.
+                    '<figcaption>'.$this->getName().'</figcaption>'.
+                '</figure>'.
+                '<p class="artist">By <a href="#">'.$this->getArtist().'</a></p>'.
+                '</article>';
+    }
+
     public function getInfoPage() {
         $html = '<article class="artwork">'.
                 '<h2 class="art_title">'.$this->getName().'</h2>'.
                 '<p class="artist">By <a href="#">'.$this->getArtist().'</a></p>'.
                 '<figure>'.
-                    '<img src="artwork/medium/13.jpg" alt="'.$this->getName().'" title="'.$this->getName().'" />'.
+                    '<img src="'.$this->getImageName().'" alt="'.$this->getName().'" title="'.$this->getName().'" />'.
                     '<figcaption>'.
                         '<p>'.$this->getDescription().'</p>'.
                         '<p class="list_price">'.formatUSD($this->getListPrice()).'</p>'.
