@@ -2,13 +2,34 @@
 
 require_once('util.php');
 require_once('staticPages.php');
+require_once('user.php');
 require_once('artwork.php');
 require_once('artist.php');
 
 $title = 'Unknown';
 $body = '404 Error';
 
+$currentUser = null;
+
+/* Check for forms */
+if (isset($_GET['form'])) {
+    switch ($_GET['form']) {
+        case 'user':
+            $currentUser = Client::handleForm($_POST['user']);
+            $_GET['pg'] = 'acct';
+            break;
+    }
+}
+
+
 switch ($_GET['pg']) {
+    case 'acct':
+        if ($currentUser == null) {
+            $currentUser = new Client((isset($_SESSION['user']))?$_SESSION['user']:null);
+        }
+        $title = $currentUser->getTitle();
+        $body = $currentUser->getInfoPage();
+        break;
     case 'artwork':
         $artwork = new Artwork(1);
         $title = $artwork->getTitle();

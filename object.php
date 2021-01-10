@@ -5,6 +5,7 @@ interface Obj {
     public function getName();
     public function getPreview();
     public function getInfoPage();
+    public static function handleForm($data);
 }
 
 ?>

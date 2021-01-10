@@ -155,6 +155,11 @@ class Artwork implements Obj {
         return $html;
     }
 
+
+    public static function handleForm($data) {
+        return null;
+    }
+
 }
 
 ?>

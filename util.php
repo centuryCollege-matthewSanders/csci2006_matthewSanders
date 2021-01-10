@@ -17,4 +17,13 @@ function buildNavigation($list,$class='') {
     return $str;
 }
 
+function getLink($queryString) {
+    $qs = ''; $glue = '';
+    foreach ($queryString as $k=>$v) {
+        $qs = $glue.$k.'='.$v;
+        $glue = '&';
+    }
+    return 'index.php?'.$qs;
+}
+
 ?>
